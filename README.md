@@ -22,7 +22,7 @@
 **If needed:**  
 `sudo apt-get install tcpreplay wireshark`
 
-`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && git clone https://github.com/willprice/python-omxplayer-wrapper.git && sudo python python-omxplayer-wrapper/setup.py install && mkdir videos && cd videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`
+`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`
 
 # Todo
 - CEC ability
