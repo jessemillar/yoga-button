@@ -24,7 +24,7 @@
 **If needed:**  
 `sudo apt-get install tcpreplay wireshark`
 
-`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/jbaiter/pyomxplayer.git && cd pyomxplayer && sudo python pyomxplayer/setup.py install`
+`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && sudo python python-omxplayer-wrapper/setup.py install && cd .. && youtube-dl https://www.youtube.com/watch?v=X0c7shiwTUg --output "yoga.%(ext)s"`
 
 # Todo
 - CEC ability
