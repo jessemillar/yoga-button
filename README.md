@@ -19,7 +19,7 @@
 **Change user password**  
 **Reboot if it doesn't automatically do so**  
 
-sudo apt-get -y install git youtube-dl omxplayer tcpdump python-scapy python-setuptools
+`sudo apt-get -y install git youtube-dl omxplayer tcpdump python-scapy python-setuptools`
 
 **If needed:**  
 `sudo apt-get install tcpreplay wireshark`
