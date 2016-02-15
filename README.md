@@ -3,26 +3,18 @@
 
 `ssh pi@192.168.0.108`  
 
-**Fixes an issue with locales on vanilla Raspbian Jessie**  
-`sudo locale-gen en_US en_US.UTF-8 && sudo dpkg-reconfigure locales`  
-
-`mkdir .ssh && cd .ssh && touch authorized_keys && chmod 600 authorized_keys && nano authorized_keys`
+`mkdir .ssh && cd .ssh && touch authorized_keys && chmod 600 authorized_keys && nano authorized_keys`  
 
 **On host machine:**  
 `cat .ssh/id_rsa.pub`  
-**Paste into authorized_keys**
+**Paste into authorized_keys**  
 
 `sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove && sudo raspi-config`  
 **Expand filesystem**  
 **Change user password**  
 **Reboot if it doesn't automatically do so**  
 
-`sudo apt-get -y install git youtube-dl omxplayer tcpdump python-scapy python-setuptools`
-
-**If needed:**  
-`sudo apt-get install tcpreplay wireshark`
-
-`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`
+`sudo apt-get -y install git youtube-dl omxplayer tcpdump python-scapy python-setuptools python-dbus && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`  
 
 # Todo
 - CEC ability
