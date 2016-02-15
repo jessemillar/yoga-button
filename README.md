@@ -12,9 +12,7 @@
 `cat .ssh/id_rsa.pub`  
 **Paste into authorized_keys**
 
-`sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove`
-
-`sudo raspi-config`  
+`sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove && sudo raspi-config`  
 **Expand filesystem**  
 **Change user password**  
 **Reboot if it doesn't automatically do so**  
@@ -24,7 +22,7 @@
 **If needed:**  
 `sudo apt-get install tcpreplay wireshark`
 
-`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && sudo python python-omxplayer-wrapper/setup.py install && cd .. && youtube-dl https://www.youtube.com/watch?v=X0c7shiwTUg --output "yoga.%(ext)s"`
+`git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && sudo python python-omxplayer-wrapper/setup.py install && cd ../videos && youtube-dl https://www.youtube.com/watch?v=X0c7shiwTUg --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`
 
 # Todo
 - CEC ability

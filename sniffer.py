@@ -16,5 +16,5 @@ def arp_display(pkt):
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
 
-player = OMXPlayer('yoga.mp4')
+player = OMXPlayer('videos/yoga.mp4')
 print sniff(prn=arp_display, filter="arp", store=0, count=0)
