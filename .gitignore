@@ -1,2 +1,5 @@
 videos
-dependencies
+python-omxplayer-wrapper
+build
+dist
+omxplayer_wrapper.egg-info
