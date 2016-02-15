@@ -9,7 +9,7 @@
 `mkdir .ssh && cd .ssh && touch authorized_keys && chmod 600 authorized_keys && nano authorized_keys`
 
 **On host machine:**  
-`cat .ssh/id_rsa.pub`
+`cat .ssh/id_rsa.pub`  
 **Paste into authorized_keys**
 
 `sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove`
