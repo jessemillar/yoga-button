@@ -1,5 +1,5 @@
 # Installation
-**[Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)**  
+**[Ubuntu Mate](https://ubuntu-mate.org/raspberry-pi/)**  
 
 `ssh pi@192.168.0.108`  
 
@@ -9,12 +9,15 @@
 `cat .ssh/id_rsa.pub`  
 **Paste into authorized_keys**  
 
-`sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove && sudo raspi-config`  
-**Expand filesystem**  
-**Change user password**  
-**Reboot if it doesn't automatically do so**  
+`sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt-get autoremove`  
 
-`sudo apt-get -y install git youtube-dl omxplayer tcpdump python-scapy python-setuptools python-dbus && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`  
+**Re-size file system**  
+`sudo fdisk /dev/mmcblk0`  
+**Delete the second partition (d, 2), then re-create it using the defaults (n, p, 2, enter, enter), then write and exit (w)**
+**Reboot the system, then:**  
+`sudo resize2fs /dev/mmcblk0p2`  
+
+`sudo apt-get -y install python-scapy python-setuptools python-dbus && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`  
 
 # Todo
 - CEC ability
