@@ -1,5 +1,6 @@
 """Sniff the network for our Dash Button's ARP request and then start a yoga video"""
 import os
+import time
 
 from omxplayer import OMXPlayer
 from scapy.all import *
@@ -17,6 +18,7 @@ def arp_display(pkt):
                     os.system("echo 'standby 0' | cec-client -s") # Turn on the TV
                 else:
                     os.system("echo 'on 0' | cec-client -s") # Turn on the TV
+                    time.sleep(3) # delays for 3 seconds
                     player.play()
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
