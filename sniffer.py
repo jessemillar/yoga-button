@@ -11,11 +11,12 @@ def arp_display(pkt):
         if pkt[ARP].psrc == '0.0.0.0': # ARP Probe
             if pkt[ARP].hwsrc == '74:c2:46:9a:ce:38': # Smart Water
                 print "Pushed Yoga Button"
-                os.system("echo 'on 0' | cec-client -s") # Turn on the TV
 
                 if player.is_playing():
                     player.quit()
+                    os.system("echo 'standby 0' | cec-client -s") # Turn on the TV
                 else:
+                    os.system("echo 'on 0' | cec-client -s") # Turn on the TV
                     player.play()
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
