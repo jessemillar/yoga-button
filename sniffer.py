@@ -15,10 +15,10 @@ def arp_display(pkt):
 
                 if player.is_playing():
                     player.quit()
-                    os.system("echo 'standby 0' | cec-client -s") # Turn on the TV
+                    os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
                 else:
-                    os.system("echo 'on 0' | cec-client -s") # Turn on the TV
-                    time.sleep(3) # delays for 3 seconds
+                    os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
+                    time.sleep(8)
                     player.play()
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
