@@ -1,10 +1,13 @@
 """Sniff the network for our Dash Button's ARP request and then start a yoga video"""
 import os
+import subprocess
 import time
 
 from omxplayer import OMXPlayer
 from scapy.all import *
 
+
+startVideo = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
 
 def arp_display(pkt):
     """Where the magic happens"""
@@ -14,14 +17,17 @@ def arp_display(pkt):
                 print "Pushed Yoga Button"
 
                 if player.is_playing():
-                    player.quit()
+                    process = subprocess.Popen(startVideo.split(), stdout=subprocess.PIPE)
+                    # output = process.communicate()[0]
+                    # player.quit()
                     # os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
                 else:
                     # os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
                     # time.sleep(8)
-                    player.play()
+                    # player.play()
+                    os.system("killall omxplayer.bin")
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
 
-player = OMXPlayer('/home/stephanie/Documents/yoga-button/videos/yoga.mkv')
+# player = OMXPlayer('/home/stephanie/Documents/yoga-button/videos/yoga.mkv')
 print sniff(prn=arp_display, filter="arp", store=0, count=0) # count=0 means to sniff forever
