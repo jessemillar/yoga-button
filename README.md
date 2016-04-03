@@ -19,7 +19,7 @@
 
 Follow Raspberry Pi instructions [here](https://github.com/Pulse-Eight/libcec).  
 
-`sudo apt-get -y install python-scapy python-setuptools python-dbus && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && chmod 755 start.sh && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`  
+`sudo apt-get -y install python-scapy python-setuptools python-dbus && sudo pip install psutil && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && chmod 755 start.sh && mkdir videos && mkdir dependencies && cd dependencies && git clone https://github.com/willprice/python-omxplayer-wrapper.git && cd python-omxplayer-wrapper && sudo python setup.py install && cd ../../videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" && cd .. && sudo python sniffer.py`  
 
 
 
