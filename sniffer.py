@@ -1,11 +1,16 @@
 """Sniff the network for our Dash Button's ARP request and then start a yoga video"""
 import os
-import psutil
 import time
 
-from omxplayer import OMXPlayer
 from scapy.all import *
 
+
+def playing(process_id):
+    try:
+        os.kill(process_id, 0)
+        return True
+    except OSError:
+        return False
 
 def arp_display(pkt):
     """Where the magic happens"""
@@ -14,7 +19,7 @@ def arp_display(pkt):
             if pkt[ARP].hwsrc == '74:c2:46:9a:ce:38': # Smart Water
                 print "Pushed Yoga Button"
 
-                if not os.kill("omxplayer.bin", 0): # Check if we're currently playing
+                if not playing("omxplayer.bin"): # Check if we're currently playing
                     os.system("omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv")
                     # player.quit()
                     # os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
