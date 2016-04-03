@@ -1,13 +1,10 @@
 """Sniff the network for our Dash Button's ARP request and then start a yoga video"""
 import os
-import subprocess
 import time
 
 from omxplayer import OMXPlayer
 from scapy.all import *
 
-
-startVideo = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
 
 def arp_display(pkt):
     """Where the magic happens"""
@@ -17,8 +14,7 @@ def arp_display(pkt):
                 print "Pushed Yoga Button"
 
                 if player.is_playing():
-                    process = subprocess.Popen(startVideo.split(), stdout=subprocess.PIPE)
-                    # output = process.communicate()[0]
+                    os.system("omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv")
                     # player.quit()
                     # os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
                 else:
