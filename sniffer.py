@@ -18,6 +18,13 @@ def playing():
 
     return False
 
+def kill_with_fire():
+    """Kill the video player"""
+    for proc in psutil.process_iter():
+        # check whether the process name matches
+        if proc.name() == "omxplayer.bin":
+            proc.kill()
+
 def arp_display(pkt):
     """Where the magic happens"""
     if pkt[ARP].op == 1: # who-has (request)
@@ -30,7 +37,7 @@ def arp_display(pkt):
                     player = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
                     # os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
                 else:
-                    os.killpg(os.getpgid(player.pid), signal.SIGTERM)  # Send the signal to all the process
+                    kill_with_fire()
                     # os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
                     # time.sleep(8)
                     # os.system("killall omxplayer.bin")
