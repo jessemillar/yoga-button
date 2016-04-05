@@ -8,11 +8,14 @@ from scapy.all import *
 
 def playing():
     """Check if the video player is currently running"""
+    print "Checking for currently-playing video"
     for proc in psutil.process_iter():
         # check whether the process name matches
         if proc.name() == "omxplayer.bin":
+            print "Currently-playing video found"
             return True
 
+    print "No currently-playing video"
     return False
 
 def kill_with_fire():
@@ -20,6 +23,7 @@ def kill_with_fire():
     for proc in psutil.process_iter():
         # check whether the process name matches
         if proc.name() == "omxplayer.bin":
+            print "Terminating video player"
             proc.kill()
 
 def download_next():
@@ -41,13 +45,17 @@ def arp_display(pkt):
                 print "Pushed Yoga Button"
 
                 if not playing():
+                    print "Turning on TV"
                     os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
+                    print "Waiting for TV"
                     time.sleep(8)
+                    print "Playing video"
                     cmd = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
                     subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
                 else:
                     kill_with_fire()
                     download_next()
+                    print "Turning off TV"
                     os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
