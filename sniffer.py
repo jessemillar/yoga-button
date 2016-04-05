@@ -47,7 +47,11 @@ def download_next():
 
     print "Downloading next video: " + next_video
 
-    ydl_opts = {"recodevideo": "mkv"}
+    ydl_opts = {
+        "recodevideo": "mkv",
+        "outtmpl": "/home/stephanie/Documents/yoga-button/yoga.%(ext)s"
+    }
+
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([next_video])
 
