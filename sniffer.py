@@ -6,9 +6,6 @@ import time
 from scapy.all import *
 
 
-player = "" # A holder variable for reasons
-downloader = "" # Another holder
-
 def playing():
     """Check if the video player is currently running"""
     print "Checking for currently-playing video"
@@ -38,7 +35,7 @@ def download_next():
 
     os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
     cmd = "youtube-dl " + next_video + " --output '/home/stephanie/Documents/yoga-button/yoga.%(ext)s' --recode-video mkv"
-    downloader = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+    subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
 
 def arp_display(pkt):
     """Where the magic happens"""
@@ -51,10 +48,10 @@ def arp_display(pkt):
                     print "Turning on TV"
                     os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
                     print "Waiting for TV"
-                    time.sleep(8)
+                    time.sleep(5)
                     print "Playing video"
-                    cmd = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
-                    player = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+                    cmd = "omxplayer /home/stephanie/Documents/yoga-button/yoga.mkv"
+                    subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
                 else:
                     kill_with_fire()
                     download_next()
