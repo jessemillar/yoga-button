@@ -2,6 +2,7 @@
 import os
 import psutil
 import time
+import youtube_dl
 
 from scapy.all import *
 
@@ -27,7 +28,10 @@ def kill_with_fire():
             proc.kill()
 
 def video_exists():
+    print "Checking if next video exists"
+
     if os.path.isfile("/home/stephanie/Documents/yoga-button/yoga.mkv"):
+        print "Next video exists"
         return True
     else:
         print "Video doesn't exist--downloading next video in queue"
@@ -42,8 +46,11 @@ def download_next():
     print "Downloading next video: " + next_video
 
     os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
-    cmd = "youtube-dl " + next_video + " --output '/home/stephanie/Documents/yoga-button/yoga.%(ext)s' --recode-video mkv"
-    subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+
+    ydl_opts = {"recodevideo": "mkv"}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([next_video])
+
     print "Next video downloaded"
 
 def arp_display(pkt):
