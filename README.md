@@ -19,7 +19,7 @@
 
 Follow Raspberry Pi instructions [here](https://github.com/Pulse-Eight/libcec).  
 
-`sudo apt-get -y install python-scapy python-setuptools python-dbus && sudo pip install psutil && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && chmod 755 start.sh && mkdir videos && cd videos && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" --recode-video mkv && cd .. && sudo python sniffer.py`  
+`sudo apt-get -y install python-scapy python-setuptools python-dbus && sudo pip install psutil && git clone https://github.com/jessemillar/yoga-button.git && cd yoga-button && chmod 755 start.sh && && youtube-dl https://www.youtube.com/watch?v=0Xdof3DtZuk --output "yoga.%(ext)s" --recode-video mkv && cd .. && sudo python sniffer.py`  
 
 
 

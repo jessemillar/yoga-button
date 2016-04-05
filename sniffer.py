@@ -6,9 +6,6 @@ import time
 from scapy.all import *
 
 
-player = ""
-cmd = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
-
 def playing():
     """Check if the video player is currently running"""
     for proc in psutil.process_iter():
@@ -25,6 +22,17 @@ def kill_with_fire():
         if proc.name() == "omxplayer.bin":
             proc.kill()
 
+def download_next():
+    """Download the next YouTube video in the queue"""
+    with open('/home/stephanie/Documents/yoga-button/scheduler/schedule.txt', 'r') as f:
+        next_video = f.readline().strip()
+
+    print "Downloading next video: " + next_video
+
+    os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
+    cmd = "youtube-dl " + next_video + " --output '/home/stephanie/Documents/yoga-button/yoga.%(ext)s' --recode-video mkv"
+    subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+
 def arp_display(pkt):
     """Where the magic happens"""
     if pkt[ARP].op == 1: # who-has (request)
@@ -33,14 +41,14 @@ def arp_display(pkt):
                 print "Pushed Yoga Button"
 
                 if not playing():
-                    # os.system("omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv")
-                    player = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-                    # os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
+                    os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
+                    time.sleep(8)
+                    cmd = "omxplayer /home/stephanie/Documents/yoga-button/videos/yoga.mkv"
+                    subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
                 else:
                     kill_with_fire()
-                    # os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
-                    # time.sleep(8)
-                    # os.system("killall omxplayer.bin")
+                    download_next()
+                    os.system("echo 'standby 0' | cec-client -s -d 1") # Turn on the TV
             else:
                 print "ARP Probe from unknown device: " + pkt[ARP].hwsrc
 
