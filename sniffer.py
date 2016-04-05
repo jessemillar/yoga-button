@@ -26,6 +26,8 @@ def kill_with_fire():
         if proc.name() == "omxplayer.bin":
             print "Terminating video player"
             proc.kill()
+            print "Deleting previous video"
+            os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
 
 def video_exists():
     print "Checking if next video exists"
@@ -44,8 +46,6 @@ def download_next():
         next_video = f.readline().strip()
 
     print "Downloading next video: " + next_video
-
-    os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
 
     ydl_opts = {"recodevideo": "mkv"}
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
