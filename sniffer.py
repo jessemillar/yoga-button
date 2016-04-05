@@ -1,4 +1,6 @@
 """Sniff the network for our Dash Button's ARP request and then start a yoga video"""
+from __future__ import unicode_literals
+
 import os
 import psutil
 import time
