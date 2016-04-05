@@ -26,6 +26,14 @@ def kill_with_fire():
             print "Terminating video player"
             proc.kill()
 
+def video_exists():
+    if os.path.isfile("/home/stephanie/Documents/yoga-button/yoga.mkv"):
+        return True
+    else:
+        print "Video doesn't exist--downloading next video in queue"
+        download_next()
+        return False
+
 def download_next():
     """Download the next YouTube video in the queue"""
     with open('/home/stephanie/Documents/yoga-button/scheduler/schedule.txt', 'r') as f:
@@ -36,6 +44,7 @@ def download_next():
     os.remove("/home/stephanie/Documents/yoga-button/yoga.mkv")
     cmd = "youtube-dl " + next_video + " --output '/home/stephanie/Documents/yoga-button/yoga.%(ext)s' --recode-video mkv"
     subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+    print "Next video downloaded"
 
 def arp_display(pkt):
     """Where the magic happens"""
@@ -44,7 +53,7 @@ def arp_display(pkt):
             if pkt[ARP].hwsrc == '74:c2:46:9a:ce:38': # Smart Water
                 print "Pushed Yoga Button"
 
-                if not playing():
+                if not playing() and video_exists(): # Check that a video is not currently playing and that the video file exists
                     print "Turning on TV"
                     os.system("echo 'on 0' | cec-client -s -d 1") # Turn on the TV
                     print "Waiting for TV"
@@ -52,7 +61,7 @@ def arp_display(pkt):
                     print "Playing video"
                     cmd = "omxplayer /home/stephanie/Documents/yoga-button/yoga.mkv"
                     subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-                else:
+                elif video_exists():
                     kill_with_fire()
                     download_next()
                     print "Turning off TV"
