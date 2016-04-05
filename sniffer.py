@@ -59,6 +59,15 @@ def download_next():
 
     print "Next video downloaded"
 
+    print "Updating queue"
+
+    with open('/home/stephanie/Documents/yoga-button/scheduler/schedule.txt', 'r') as fin:
+        data = fin.read().splitlines(True)
+    with open('/home/stephanie/Documents/yoga-button/scheduler/schedule.txt', 'w') as fout:
+        fout.writelines(data[1:])
+
+    print "Queue updated"
+
 def arp_display(pkt):
     """Where the magic happens"""
     if pkt[ARP].op == 1: # who-has (request)
